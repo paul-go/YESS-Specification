@@ -1,4 +1,4 @@
-![Logo](Yess-Logo.svg)
+![Logo](Yess-Readme-Logo.svg)
 
 # YESS: A Reboot Of RSS
 

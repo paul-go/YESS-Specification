@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="356px" height="357px" viewBox="0 0 356 357" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon</title>
+    <g id="Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="YESS" transform="translate(-169.000000, -142.000000)" fill="#000000">
+            <g id="Group" transform="translate(169.162645, 142.662645)">
+                <g id="Icon" transform="translate(177.837355, 177.837355) rotate(-45.000000) translate(-177.837355, -177.837355) translate(52.837355, 51.337355)">
+                    <polygon id="3" points="200 -2.47434327e-13 250 -2.38809282e-13 250 253 -4.98926666e-14 253 -4.98926666e-14 203 200 203"></polygon>
+                    <polygon id="2" points="125 -2.47434327e-13 175 -2.38809282e-13 175 175 -4.495658e-14 175 -3.31604604e-14 125 125 125"></polygon>
+                    <polygon id="1" points="47.5718075 0.281439558 97.2182541 4.36483168e-12 97.2182541 102.875108 2.60543684e-12 104.289322 0.195653121 53.3144481 47.5718075 52.6073414"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
