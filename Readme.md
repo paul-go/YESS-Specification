@@ -32,7 +32,7 @@ There are numerous reasons why the RSS technology failed to become the dominant 
 
 **Google discontinued Google Reader**. Google Reader had significant market share of the RSS Reader space, and so the discontination of this product was a crippling blow to the protocol. Google's stated reasons for this decision was because of dying interest in the product and RSS in general. One could take the conspiratorial path and speculate about the fact that the decentralized nature of RSS is at odds with Google's business model of consolodating their control over data. **(COMMENT REQUESTED: Can someone from Google add insight?)** 
 
-**(COMMENTS REQUESTED: Are there other key reasons why RSS failed? )**
+**(COMMENT REQUESTED: Are there other key reasons why RSS failed? )**
 
 
 
