@@ -67,8 +67,8 @@ Each of these are optional, and are described below
 -->
 <meta name="yess-stream" content="...">
 <meta name="yess-suggest" content="...">
-<meta name="yess-range" content="...">
-<meta name="yess-insert" content="...">
+<meta name="yess-story" content="...">
+<meta name="yess-cut" content="...">
 <meta name="yess-ping" content="...">
 <!--
 Typical information found in the <head> element of an HTML page
@@ -116,80 +116,57 @@ The format of the suggestions file is documented below under *Suggest Files*.
 
 
 
-### The `yess-range` Meta Tag
+### The `yess-story` Meta Tag
 
-Specifies the range of scenes to render after the trailer scene. The formatting of the first number in the range is significant, as it indicates how the following scene files are expected to be named.
+Specifies the location of the file that contains the scenes that will be added after the trailer scene.
 
 ```html
-<meta name="yess-range" content="2-5">
+<meta name="yess-story" content="/path/to/story.html">
 ```
 
-If we assume that the origin of the trailer file was loaded from `example.com/index.html`, then this will indicate that the following URLs will be downloaded and injected into the scene progression:
-
->example.com/2.html
->example.com/3.html
->example.com/4.html
->example.com/5.html
-
-The formatting of the numbers, specifically the number of leading zeros, is respected. Given the following tag:
+Alternatively, the `content` attribute can be omitted, in which case, a file called `story.html` is requested at the same location as the loaded trailer HTML file.
 
 ```html
-<meta name="yess-range" content="0001-0010">
-```
-
-The following URLs will be downloaded:
-
->example.com/0001.html
->example.com/0002.html
->...
->
->example.com/0009.html
->example.com/0010.html
-
-The first number in the `yess-range` content value cannot have a longer string length than the last number, otherwise, the data is considered to be invalid and an error is generated:
-
-```html
-<!-- This is an error -->
-<meta name="yess-range" content="00001-99">
+<meta name="yess-story">
 ```
 
 
 
-### The `yess-insert` Meta Tag
+### The `yess-cut` Meta Tag
 
-The `yess-insert` meta tag is used to inject other scenes into the scene progression that are not specified by the range of scenes loaded with the `yess-range` meta tag. This feature is tended to inject various interstitials that are used across many pages, such as calls to action, sponsors, or other commonly reused content.
+The `yess-cut` meta tag is used to inject outside scenes into the story. This feature is intended to support injection of various interstitial scenes that are reused across many pages, such as calls to action or sponsorship messages.
 
-The structure of the `yess-insert` attribute is as follows:
+The structure of the `yess-cut` attribute is as follows:
 
 ```html
-<meta name="yess-insert" content="[url], at=[position], if=[condition]">
+<meta name="yess-cut" content="[url], at=[position], if=[condition]">
 ```
 
 **[url]**
 **Required**. Defines a path to the HTML file whose scenes should be injected. The URL is relative to the current URL. If the path contains space characters, they must be URL-encoded.
 
 **at=[position]**
-**Optional**. Defines the position within the scene range to insert a scene. Negative numbers are accepted, which inserts the scene at an index counting from the end of the range. If omitted, the scene is inserted at the end of the range.
+**Optional**. Defines the position of the scene within the story to insert the new scenes. Negative numbers are accepted, which inserts the scene at an index counting from the end of the story. If omitted, the scene is inserted at the end of the story.
 
 The trailer scene is not considered when determining the insertion position of a scene. The trailer scene is always first. All scene insertion occurs before the trailer. Therefore, the 0th position is considered to be the position *after* the trailer.
 
 **if=[conditition]**
-**Optional**. Only executes the insertion when the client is determined to be a member of client-side segment. See Client-Side Segmentation for more information on how to establish segments and conditions. If omitted, the insertion is always executed.
+**Optional**. Only executes the operation when the client is determined to be a member of client-side segment. See Client-Side Segmentation for more information on how to establish segments and conditions. If omitted, the insertion is always executed.
 
 The URL subattribute must come first, but the successive attributes may come in any order.
 
-Some complete examples of `yess-insert` tags are as follows:
+Some complete examples of `yess-cut` tags are as follows:
 
 ```html
-<meta name="yess-insert" content="../index.html, if=subscriber">
-<meta name="yess-insert" content="../index.html, if=subscriber, at=-1">
-<meta name="yess-insert" content="../index.html">
+<meta name="yess-cut" content="../index.html, if=subscriber">
+<meta name="yess-cut" content="../index.html, if=subscriber, at=-1">
+<meta name="yess-cut" content="../index.html">
 ```
 
-**Multiple insertion can be defined** by separating the attributes with the `;` character. In this case, multiple insertions of scenes occur as would be expected. It is important to note however, that the insertions occur **all at once** rather than **sequentially**, meaning that inserting a scene at an earlier point in the progression does not impact the index numbers. For example, consider a page with 5 scenes (excluding the trailer) that defines the following insertions in the form:
+**Multiple cuts can be defined** on the same story by separating the attributes with the `;` character. In this case, multiple cut scnes will be inserted as would be expected. It is important to note however, that the insertions occur **all at once** rather than **sequentially**, meaning that inserting a scene at an earlier point in the progression does not impact the index numbers. For example, consider a story with 5 scenes (excluding the trailer) that defines the following insertions in the form:
 
 ```html
-<meta name="yess-insert" content="
+<meta name="yess-cut" content="
 	../a.html, at=0;
 	../b.html, at=4">
 ```
@@ -487,7 +464,7 @@ The left side must be an identifer, and the optional right side must be a litera
 Logical AND is done by specifying having a compound statement:
 
 ```html
-<meta name="yess-insert" content="
+<meta name="yess-cut" content="
 	../a.html, if=mycount < 10;
 	../a.html, if=mycount > 20">
 ```
