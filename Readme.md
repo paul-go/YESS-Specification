@@ -2,7 +2,7 @@
 
 # YESS: A Reboot Of RSS
 
-**STATUS**: This document is a draft specification. A number of supporting libraries are currently under development, as well as a YESS reader app known as *Direct*.
+**STATUS**: This document is a draft specification. A number of supporting libraries are currently under development, as well as a YESS reader + builder app known as *Direct*.
 
 ## Summary
 
