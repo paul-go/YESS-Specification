@@ -14,7 +14,7 @@ The RSS protocol was invented in 1999 as a way for journalists to syndicate cont
 
 By 2005, the protocol was beginning to achieve mainstream adoption, with major publications such as the New York Times beginning to offer their content in RSS format. However, due to shifts in technology, paired with flaws in the design of RSS itself, RSS began to lose its appeal.
 
-Today RSS rests as an obscure protocol, and the demand for content syndication has been mostly filled by social media. This is unfortunate, as social media platforms have become notorious for committing abuses against users in their quest of maximizing ad revenue, seemingly by any means necessary. The list of abuses are seemingly endless: intentionally trying to get the public (especially youth) addicted to degenerative content, censoring controversial ideas, spying on users, excessive harvesting of their private personal information, and more.
+Today RSS rests as an obscure protocol, and the demand for content syndication has been mostly filled by social media. This is unfortunate, as social media platforms have become notorious for committing abuses against users in their quest to maximize ad revenue, seemingly by any means necessary. The list of abuses are seemingly endless: intentionally trying to get the public (especially youth) addicted to degenerative content, censoring controversial ideas, spying on users, excessive harvesting of their private personal information, and more.
 
 ## Learning From The Past
 
