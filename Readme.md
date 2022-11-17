@@ -6,7 +6,7 @@
 
 ## Summary
 
-This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. YESS stands for *You Easily Syndicate Scenes*, as the protocol is largely about splitting static HTML up into small single-screen components, called *Scenes*, which can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication, and bring the internet back to its original roots of allowing users to retain full control over their online persona.
+This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. YESS stands for *You Easily Syndicate Scenes*. The protocol is largely about splitting static HTML up into small single-screen components, called *Scenes*. Scenes can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication. It attemps to bring the internet back to its original roots of allowing users to retain full control over their online persona.
 
 ## History Of RSS
 
@@ -14,23 +14,23 @@ The RSS protocol was invented in 1999 as a way for journalists to syndicate cont
 
 By 2005, the protocol was beginning to achieve mainstream adoption, with major publications such as the New York Times beginning to offer their content in RSS format. However, due to shifts in technology, paired with flaws in the design of RSS itself, RSS began to lose its appeal. 
 
-Today RSS rests as an obscure protocol, and the demand for content syndication has been mostly filled by social media. This is unfortunate, as social media platforms have become notorious for committing abuses against users in order to maximize ad revenue, seemingly by any means necessary. The list of abuses are seemingly endless: intentionally trying to get the public (especially youth) addicted to degenerative content, censoring controversial ideas, spying on users, excessive harvesting of their private personal information, and more.
+Today RSS rests as an obscure protocol, and the demand for content syndication has been mostly filled by social media. This is unfortunate, as social media platforms have become notorious for committing abuses against users in their quest of maximizing ad revenue, seemingly by any means necessary. The list of abuses are seemingly endless: intentionally trying to get the public (especially youth) addicted to degenerative content, censoring controversial ideas, spying on users, excessive harvesting of their private personal information, and more.
 
 ## Learning From The Past
 
-There are numerous reasons why the RSS technology failed to become the dominant means of media distribution. It is worth articulating these failures here in order to lay a foundation to not make the same mistakes again.
+There are numerous reasons why the RSS technology failed to become the dominant means of media distribution. It is worth articulating these failures here in order to lay a foundation that avoids making the same mistakes again.
 
-**It was built to syndicate the wrong kind of content**. RSS was built to syndicate long-form text articles, such as the type of content found in newspapers. While this certainly has a place, as the mobile revolution took place, market demand shifted towards short-form bite-size content that could be consumed intermittently while on the go.
+**It was built to syndicate the wrong kind of content**. RSS was built to syndicate long-form text articles, such as the type of content found in newspapers. This certainly has a place. But as the mobile revolution took place, market demand shifted towards short-form bite-size content that could be consumed intermittently while on the go.
 
-**It only had email for inspiration**. There's a reason RSS readers all felt like email clients. The only widely adopted dissemenation technology that came before RSS was email. The concept of *scrolling a feed*, and the industry insights around doing this effectively didn't exist at the time. 
+**It only had email for inspiration**. There's a reason RSS readers all felt like email clients. The only widely adopted dissemenation technology that came before RSS was email. The concept of *scrolling a feed* wasn't a well understood construct at the time. 
 
-**It tried to compete with HTML**. This is a mistake that few people seem to acknowledge. Any amount of investigation into the structure of RSS's XML format will show that it's largely a web-based presentation layer, and an anemic one at that. Every web-based presentation layer that has tried to compete with HTML has failed (Java Applets, Flash, Silverlight). Of course–it could be argued that RSS's "reduced instruction set" was part of the appeal, and there is some truth to this. But this feat certainly cannot be executed given the next point...
+**It tried to compete with HTML**. This is a mistake that few people seem to acknowledge. RSS's XML format is largely a web-based presentation layer, and an anemic one at that. Every web-based presentation layer that has tried to compete with HTML has failed (Java Applets, Flash, Silverlight).
 
-**The standardization group suffered from constant in-fighting**. Because it was a presentation layer, there was simply too much that needed to be agreed upon in order to come to consensus about the behavior of the system.
+**The standardization group suffered from constant in-fighting**. Because it was a presentation layer, the standardization group ended up fighting over trivialities such as whether bulleted lists should be included, instead of addressing larger issues such as analytics collection and monetization concerns.
 
 **It was the worst of both worlds between email and the web**. Publications could either drive traffic to their website, where they could provide rich user experience, adhere to brand guidelines, collect analytics, and ultimately drive monetization. Or, they could drive their audience to subscribe to their newsletter, which doesn't have quite the same richness or analytics, but has very rich segmentation and the content could personalized to each user, and drive monetization that way. Or they could send traffic to their RSS feed, which did neither of these things, and worked against the publications monetization interests.
 
-**Google discontinued Google Reader**. Google Reader had significant market share of the RSS Reader space, and so the discontination of this product was a crippling blow to the protocol. Google's stated reasons for this decision was because of dying interest in the product and RSS in general. One could take the conspiratorial path and speculate about the fact that the decentralized nature of RSS is at odds with Google's business model of consolodating their control over data. **(COMMENT REQUESTED: Can someone from Google add insight?)** 
+**Google discontinued Google Reader**. Google Reader had significant market share of the RSS Reader space, and so the discontination of this product was a crippling blow to the protocol. Google's stated reasons for this decision was because of dying interest in the product and RSS in general. One could take the conspiratorial path and speculate about the fact that the decentralized nature of RSS is at odds with Google's business model of consolidating their control over data. **(COMMENT REQUESTED: Can someone from Google add insight?)** 
 
 **(COMMENT REQUESTED: Are there other key reasons why RSS failed? )**
 
@@ -40,7 +40,7 @@ There are numerous reasons why the RSS technology failed to become the dominant 
 
 **The YESS specification ought to be as narrow as possible**. Large, bloated specifications make concensus difficult and increase the likelihood of fueling internal politics.
 
-**Manage the balance between privacy and monetization**. While YESS aims to be _vastly_ more privacy concious than the experience found on social media platforms, it is important to stress that *strict privacy purism* is not a goal. Creators must be able to collect insights into the consumption habits of their audience in order to produce quality content, drive monetization, and continue to invest in the protocol. Placing too high of value on privacy pushes away creators. Ironically, this results in less overall privacy, as the protocol fails and the major social platforms remain dominant.
+**Manage the balance between privacy and monetization**. While YESS aims to be _vastly_ more privacy concious than the experience found on social media platforms, it is important to stress that *strict privacy purism* is not a goal. Creators must be able to collect insights into the consumption habits of their audience in order to produce quality content, drive monetization, and continue to invest in the protocol. Placing too high a value on privacy pushes away creators. Ironically, this results in less overall privacy, as the protocol fails and the major social platforms remain dominant.
 
 **Static file servers must be sufficient for distribution**. The second specialized server software is required to be installed on a machine to even get started, the technology becomes much harder to adopt, especially for less technical users. Special software may be required to support YESS's analytics collection features.
 
