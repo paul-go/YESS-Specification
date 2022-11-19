@@ -6,7 +6,7 @@
 
 ## Summary
 
-This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. YESS stands for *You Easily Syndicate Scenes*. The protocol is largely about splitting static HTML up into small single-screen components, called *Scenes*. Scenes can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication. It attemps to bring the internet back to its original roots of being a decentralized information exchange technology without single points of control.
+This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. YESS stands for *You Easily Syndicate Scenes*. The protocol is largely about splitting static HTML up into small single-screen components, called *Scenes*. Scenes can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication. It attemps to bring the internet back to its original roots of being a decentralized information exchange technology without centralized points of control.
 
 ## History Of RSS
 
@@ -63,9 +63,7 @@ YESS is a protocol for describing the format of various static files that form a
 <title>...</title>
 <!--
 YESS-specific <meta> tags
-Each of these are optional, and are described below
 -->
-<meta name="yess-stream" content="...">
 <meta name="yess-suggest" content="...">
 <meta name="yess-story" content="...">
 <meta name="yess-cut" content="...">
