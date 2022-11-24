@@ -6,7 +6,11 @@
 
 ## Summary
 
-This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. YESS stands for *You Easily Syndicate Scenes*. The protocol is largely about splitting static HTML up into small single-screen components, called *Scenes*. Scenes can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication. It attemps to bring the internet back to its original roots of being a decentralized information exchange technology without centralized points of control.
+This document describes a new media syndication protocol, called the *YESS* protocol, which can be thought of as both a natural successor as well as a radical reformation of RSS. Or more simply, *RSS done right*. YESS stands for *You Easily Syndicate Scenes*. The protocol is a subset of HTML and CSS. It's central design idea is to split static HTML files up into small single-screen components, called *Scenes*. 
+
+Scenes can be mixed and matched to create rich multi-screen web experiences which are ultimately syndicated to end-users. The experiences can be streamed directly into a YESS reader app installed on an end-user's device (similar to how RSS readers worked), or they can be embedded on any website.
+
+The overarching goal of this protocol is to unseat the social media platforms as the dominant means of media syndication. It attemps to bring the internet back to its original roots of being a decentralized information exchange technology without centralized points of control.
 
 ## History Of RSS
 
@@ -20,268 +24,148 @@ Today RSS rests as an obscure protocol, and the demand for content syndication h
 
 There are numerous reasons why the RSS technology failed to become the dominant means of media distribution. It is worth articulating these failures here in order to lay a foundation that avoids making the same mistakes again.
 
-**It was built to syndicate the wrong kind of content**. RSS was built to syndicate long-form text articles, such as the type of content found in newspapers. This certainly has a place. But as the mobile revolution took place, market demand shifted towards short-form bite-size content that could be consumed intermittently while on the go.
+**It wasn't based on HTML & CSS**. Instead, it was based on a very weak presentation format that offered brands very little flexibility in the way of controling the design of their content. It's worth noting that every web-based presentation layer that has tried to compete with HTML has failed (Java Applets, Flash, Silverlight).
 
-**It only had email for inspiration**. There's a reason RSS readers all felt like email clients. The only widely adopted dissemenation technology that came before RSS was email. The concept of *scrolling a feed* wasn't a well understood construct at the time. 
+**It was built to syndicate only one kind of content**. RSS was built to syndicate monolithic text articles, such as the type of content found in newspapers. This certainly has a place. But as the mobile revolution took place, market demand diversified. Short-form bite-size content now accounts for a major portion of the demand, as it can be consumed intermittently while on the go.
 
-**It tried to compete with HTML**. This is a mistake that few people seem to acknowledge. RSS's XML format is largely a web-based presentation layer, and an anemic one at that. Every web-based presentation layer that has tried to compete with HTML has failed (Java Applets, Flash, Silverlight).
+**It was hard to monetize**. It didn't offer the kind of control or rich analytics you get from driving traffic to a  website, and it didn't offer the rich audience segmentation and personalization capabilities that are available with email newsletters.
+
+**It only had email for inspiration**. There's a reason RSS readers all felt like email clients. The only widely adopted dissemenation technology that came before RSS was email. The concept of *scrolling a feed* wasn't a well understood construct at the time.
 
 **The standardization group suffered from constant in-fighting**. Because it was a presentation layer, the standardization group ended up fighting over trivialities such as whether bulleted lists should be included, instead of addressing larger issues such as analytics collection and monetization concerns.
 
-**It was the worst of both worlds between email and the web**. Publications could either drive traffic to their website, where they could provide rich user experience, adhere to brand guidelines, collect analytics, and ultimately drive monetization. Or, they could drive their audience to subscribe to their newsletter, which doesn't have quite the same richness or analytics, but has very rich segmentation and the content could personalized to each user, and drive monetization that way. Or they could send traffic to their RSS feed, which did neither of these things, and worked against the publications monetization interests.
-
 **Google discontinued Google Reader**. Google Reader had significant market share of the RSS Reader space, and so the discontination of this product was a crippling blow to the protocol. Google's stated reasons for this decision was because of dying interest in the product and RSS in general. One could take the conspiratorial path and speculate about the fact that the decentralized nature of RSS is at odds with Google's business model of consolidating their control over data. **(COMMENT REQUESTED: Can someone from Google add insight?)** 
 
-**(COMMENT REQUESTED: Are there other key reasons why RSS failed? )**
+**(COMMENT REQUESTED: Are there other key reasons why RSS failed?)**
 
 
 
 ## Design Goals
 
-**The YESS specification ought to be as narrow as possible**. Large, bloated specifications make concensus difficult and increase the likelihood of fueling internal politics.
-
 **Manage the balance between privacy and monetization**. While YESS aims to be _vastly_ more privacy concious than the experience found on social media platforms, it is important to stress that *strict privacy purism* is not a goal. Creators must be able to collect insights into the consumption habits of their audience in order to produce quality content, drive monetization, and continue to invest in the protocol. Placing too high a value on privacy pushes away creators. Ironically, this results in less overall privacy, as the protocol fails and the major social platforms remain dominant.
 
-**Static file servers must be sufficient for distribution**. The second specialized server software is required to be installed on a machine to even get started, the technology becomes much harder to adopt, especially for less technical users. Special software may be required to support YESS's analytics collection features.
+**Static file servers must be sufficient for distribution**. The second specialized server software is required to be installed on a machine to even get started, the technology becomes much harder to adopt, especially for less technical users. (Special software may be necessary to operate as a catch basket for YESS's analytics reporting functionality).
 
-**Welcome HTML & CSS. Shun arbitrary JavaScript**. HTML & CSS are ubiquitous and powerful. Inventing a new presentation layer is a fools errand. However, arbitrary JavaScript–which is script that is provided by the creator rather than the protocol itself–will turn YESS into everything that's wrong with today's web–irritating popovers,  tracking scripts, performance-destructive banner ads, UI patterns that don't translate to mobile, etc.
+**Unleash the full power of HTML & CSS, but shun JavaScript**. HTML & CSS are ubiquitous and powerful. Inventing a new presentation layer is a fools errand. However, arbitrary JavaScript–which is script that is provided by the creator rather than the protocol itself–will turn YESS into everything that's wrong with today's web–irritating popovers,  tracking scripts, performance-destructive banner ads, UI patterns that don't translate to mobile, etc.
 
-**Anticipate pre-processors**. Don't add things to the specification that could otherwise be done with a preprocessor. Pre-processors and generation tools are abundant across all of the major web presentation technologies (HTML, CSS, JavaScript, SVG). YESS will be no different.
-
-
+**The YESS specification ought to be as narrow as possible**. Large, bloated specifications make concensus difficult and increase the likelihood of fueling internal politics.
 
 # Overview
 
-YESS is a protocol for describing the format of various static files that form a web page with a specific format. The web page is divided into *Scenes*. A *Scene* is a block of content whose height is at least the height of a single screen of the user's device. Each Scene of the web page can be swiped through sequentially. The sequential scene-swipe progression is composed by the user agent merging together one or more Scene  files. When the end of the scene progression is reached, there exists a *List* file which contains pointers to other suggested content.
+In YESS, a web page is called a *Story*. A Story is composed from one or more HTML files, each which contains one or more *Scenes*. A *Scene* is a block of content whose height is at least the height of a single screen of the user's device, and is denoted by the `<section>` tag. Each Scene of the web page can be swiped through sequentially. The sequential scene-swipe progression is composed at runtime by the user agent merging together the HTML files that compose the story. There are two kinds of HTML files: *Cover* HTML files and *Body* HTML files.
 
-## Trailer HTML Files
+## Cover HTML Files
 
-*Trailer* files contain the first scene of the (named "index.html"). The general format of Trailer index.html files are as follows:
+*Cover* files contain the first scene of the (named "index.html"). The general format of Cover index.html files are as follows:
 
 ```html
 <!doctype html>
 <title>...</title>
-<!--
-YESS-specific <meta> tags
--->
-<meta name="yess-suggest" content="...">
-<meta name="yess-story" content="...">
-<meta name="yess-cut" content="...">
-<meta name="yess-ping" content="...">
-<!--
-Typical information found in the <head> element of an HTML page
-should be placed here.
--->
+
+<!-- Ping location, for analytics. Documented below. -->
+<meta name="yess-ping" content="https://www.analytics.com/path">
 
 <!--
-There's no <body> tag.
-Instead, trailer files have a single top-level <section> tag.
+Typical information found in the <head> element of an HTML page,
+such as style sheets or other <meta> tags may be be placed here.
 -->
+
 <section>
 	...
 </section>
+<embed src="sponsor.html">
+<embed src="scenes.html">
 ```
 
+Cover HTML files expected to have a single top-level `<section>` tag, which is the container of the first scene, which is followed by zero or more `<embed>` tags. The reason the cover file contains exactly one scene is because user agents must have the ability to download the first scene without downloading all other scenes. This design paves the way for a very common grid-style user interface pattern, such as what found in the show-selection interface in Netflix. In this pattern, the user is presented with a number of high-fidelity cover visuals, each which can be selected in order to drill into the content.
 
+The `<embed>` tags that follow the `<section>` tag reference other HTML files that are downloaded *after* the user has selected a particular cover visual, and intends to make their way through the entire story. The `src` attribute of these tags `<embed>` tags must reference *Body* HTML files (explained below), or to *Stream* text files (also explained below).
 
-### The `yess-suggest` Meta Tag
+## Body HTML Files
 
-Specifies the location of the suggestions file whose contents are encouraged to be displayed alongside this page. If this meta tag is omitted, no follow-up options are displayed.
-
-```html
-<meta name="yess-suggest" content="/some/path/suggest.txt">
-```
-
-Alternatively, the content attribute may be omitted, which instructs the YESS reader to request a file called `suggest.txt` in the same location as the displaying page:
-
-```html
-<meta name="yess-suggest">
-```
-
-The `yess-suggest` meta tag can contain multiple suggestions files, if they are separated by the `;` character. In this case, the suggestions from each file are merged sequentially into a single suggestions list.
-
-```html
-<meta name="yess-suggest" content="suggestions-1.txt; suggestions-2.txt">
-```
-
-YESS introduces the notion of *client-side segmentation*, which is covered in more depth in a following section of this document. The `yess-index` attribute can specify a client-side segmentation value, using the `if` sub-attribute. The user agent should detect if the segmentation condition applies, in which case, the suggestions from the specified URL will be included.
-
-```html
-<meta name="yess-suggest" content="suggest.txt, if=segment">
-```
-
-The format of the suggestions file is documented below under *Suggest Files*.
-
-
-
-### The `yess-story` Meta Tag
-
-Specifies the location of the file that contains the scenes that will be added after the trailer scene.
-
-```html
-<meta name="yess-story" content="/path/to/story.html">
-```
-
-Alternatively, the `content` attribute can be omitted, in which case, a file called `story.html` is requested at the same location as the loaded trailer HTML file.
-
-```html
-<meta name="yess-story">
-```
-
-
-
-### The `yess-cut` Meta Tag
-
-The `yess-cut` meta tag is used to inject outside scenes into the story. This feature is intended to support injection of various interstitial scenes that are reused across many pages, such as calls to action or sponsorship messages.
-
-The structure of the `yess-cut` attribute is as follows:
-
-```html
-<meta name="yess-cut" content="[url], at=[position], if=[condition]">
-```
-
-**[url]**
-**Required**. Defines a path to the HTML file whose scenes should be injected. The URL is relative to the current URL. If the path contains space characters, they must be URL-encoded.
-
-**at=[position]**
-**Optional**. Defines the position of the scene within the story to insert the new scenes. Negative numbers are accepted, which inserts the scene at an index counting from the end of the story. If omitted, the scene is inserted at the end of the story.
-
-The trailer scene is not considered when determining the insertion position of a scene. The trailer scene is always first. All scene insertion occurs before the trailer. Therefore, the 0th position is considered to be the position *after* the trailer.
-
-**if=[conditition]**
-**Optional**. Only executes the operation when the client is determined to be a member of client-side segment. See Client-Side Segmentation for more information on how to establish segments and conditions. If omitted, the insertion is always executed.
-
-The URL subattribute must come first, but the successive attributes may come in any order.
-
-Some complete examples of `yess-cut` tags are as follows:
-
-```html
-<meta name="yess-cut" content="../index.html, if=subscriber">
-<meta name="yess-cut" content="../index.html, if=subscriber, at=-1">
-<meta name="yess-cut" content="../index.html">
-```
-
-**Multiple cuts can be defined** on the same story by separating the attributes with the `;` character. In this case, multiple cut scnes will be inserted as would be expected. It is important to note however, that the insertions occur **all at once** rather than **sequentially**, meaning that inserting a scene at an earlier point in the progression does not impact the index numbers. For example, consider a story with 5 scenes (excluding the trailer) that defines the following insertions in the form:
-
-```html
-<meta name="yess-cut" content="
-	../a.html, at=0;
-	../b.html, at=4">
-```
-
-The above will result in a scene progression such as:
-
-1. Trailer scene
-2. Scene or scenes defined within *a.html*
-3. Scene from 0.html
-4. Scene from 1.html
-5. Scene from 2.html
-6. Scene from 3.html
-7. Scene from *b.html*
-8. Scene from 4.html
-
-
-
-### The `yess-ping` Meta Tag
-
-YESS introduces the notion of sending *Pings* to a specific URL in response to user-triggered events. The `yess-ping` meta tag specifies the base URL where pings are send. More information about pings is included below.
-
-```html
-<meta name="yess-ping" content="https://www.analytics.com/path">
-```
-
-The URL may not specify a query string value (`?a=b`) or a fragment (`#`)
-
-## Scene HTML Files
-
-Scene HTML files have one or more HTML `<section>` tags at the top level of the document. The contents within each `<section>` tag represents a separate scene.
+Body HTML files have one or more inter-woven HTML `<section>` and/or `<embed>` tags at the top level of the document. Each `<section>` tag and it's nested content represents a separate scene. For example, the `<section>` and `<embed>` interweaving pattern is valid YESS:
 
 ```html
 <section>
 	HTML for section 1
 </section>
+<embed src="section-2-and-3.html">
 <section>
-	HTML for section 2
+	HTML for section 4
 </section>
 <section>
-	HTML for section 3
+	HTML for section 5
 </section>
+<embed src="section-6.html">
 ```
 
-Content outside of the root-level section tags must be ignored by the user agent. This can be useful in order to make the scene HTML files independently loadable, for example, by adding a `<!doctype>` declaration at the top or an HTML `<head>` section.
+Content outside of the root-level `<section>` and `<embed>` tags must be ignored by the user agent. This can be useful in order to make the scene HTML files independently loadable, for example, by adding a `<!doctype>` declaration at the top or an HTML `<head>` section.
 
-## Ignored HTML Tags
+It's worth noting that because Body HTML files contain one or more scenes, as well as references other Body HTML files, YESS scene progressions (called *Stories*) are organized into a **branched linked list** of scenes. Each Body HTML file is an independent and portable unit, which allows stories to contain scenes that can be reorganized and reused.
 
-All HTML tags are permissable for use in YESS documents, with the exception of those listed below. If any of the tags listed below are found in a YESS document, they must be ignored by user agents, as well as any children nested within them:
+**Some HTML tags are not recognized in YESS**. The tags below could download untrusted content or could modify the user experience in undesirable ways. This could pose a security risk and therefore must be ignored by the YESS user agent:
 
+- `<base>`
 - `<script>`
 - `<iframe>`
 - `<object>`
-- `<embed>`
-- `<portal>` (Not standardized, but ignored)
+- `<portal>`
+- `<embed>`, if the tag is not defined at the top level, and/or if the tag does not reference a `.html` or `.txt` file. You cannot use the `<embed>` tag to create an instance of a browser plugin.
 
+## Stream Text Files
 
+Stream text files provide a space-efficient way of referring to a number of other stories and streams in a single file. These files are in a plain-text line-based format. Each line is either a URL that points either to a cover HTML file, or another stream text file. The URLs may be absolute or relative. If they're relative, they're relative to the location the stream file.
 
-## Suggest Files
+```
+path/to/cover
+path/to/another/cover
+../path/to/stream.txt
+```
 
-Suggest files are expected to be a plain-text file, where each line in the file is either a path to a suggested URL, or another Suggest file. The URLs specified in the suggestion file are relative to the location of where the suggestion file was loaded.
+The format of these text files is line-based, the format is essentially a reduction of a large list of `<embed>` tags.  For example, the YESS specification defines the `data-if=`  HTML attribute which is used to perform client-side audience segmentation (described below). These attributes can be included via the following syntax
 
 ```
 path/to/something
-path/to/something/else
-path/to/another/index.txt
+path/to/something/else if=segment1
+path/to/another/index.txt if=segment2
 ```
 
-Each URL that points to a suggestion is expected to be a URL to a trailer HTML file. This way, previews of the suggested content can be used for presentation purposes.
-
-Lines in the suggest file can contain `if` attributes, using a syntax that is similar to the YESS meta tags:
-
-```
-path/to/something
-path/to/something/else, if=customer
-path/to/another/index.txt, if=customer
-```
-
-
-
-## Stream Files
-
-In addition to the suggest files that are linked from the Trailer HTML, there also exists another type of suggest file called a *Stream File*. Stream files provide a way for the YESS reader to subscribe and automatically download a stream of updates found at some URL. Stream files have the identical format as suggest files.
-
-Authors can provide a way to subscribe to YESS streams by pointing the browser to a URL that uses the `yess://` protocol URI scheme. The format of this URI scheme is as follows:
-
-```
-yess://[relative-path-to-stream-file.txt]
-```
-
-The URL of the stream is required to end in `.txt`. If it does not, there is undefined behavior around how meta information associated with the stream is discovered.
-
-A concrete example of a clickable subscription link could look like:
+Which can be thought of as being functionally equivalent to:
 
 ```html
-<a href="yess://../stream.txt">Subscribe to my YESS feed</a>
+<embed src="path/to/something">
+<embed src="path/to/something/else" data-if="segment1">
+<embed src="path/to/another/index.txt" data-if="segment2">
 ```
 
-These links can exist anywhere in YESS content. They can also be embedded within any web page, which requires the user to have a YESS reader installed in order to recognize the `yess://` scheme.
 
-This design allows authors to provide one-click subscribe to many different YESS streams all in the same location:
+
+### Syndicated Stream Text Files
+
+Authors can apply the file extension `.s.txt` to their stream text files instead of just `.txt` , which signals to the user agent that the content is frequently updated, and that it should consider giving the user the choice to connect the syndication stream to their reader application.
+
+
+
+### Linking To Syndicated Stream Text Files
+
+Authors can provide a way to encourage their readers to subscribe to YESS streams by pointing the browser to a URL that ends in the `.s.txt`  extension. This is done through the use of an anchor `<a>` tag. For example:
 
 ```html
-<a href="yess://fishing.txt">Subscribe to my fishing YESS feed</a>
-<a href="yess://cooking.txt">Subscribe to my cooking YESS feed</a>
+<a href="feed.s.txt">Subscribe to my YESS feed</a>
+```
+
+These links can exist anywhere in YESS content. This design allows authors to provide one-click subscribe to many different YESS streams all in the same location:
+
+```html
+<a href="fishing.s.txt">Subscribe to my fishing YESS feed</a>
+<a href="cooking.s.txt">Subscribe to my cooking YESS feed</a>
 ```
 
 Authors can point to YESS streams to recommend other YESS streams that exist on other domains:
 
 ```html
-<a href="yess://https://alice.com/knitting.txt">Subscribe to Alice's knitting YESS feed.</a>
+<a href="https://alice.com/knitting.s.txt">Subscribe to Alice's knitting YESS feed.</a>
 ```
-
-## Transferring Context
-
-There exists the case where a user could take a variety of actions which generate segmentation data, then choose to subscribe to a particular stream, and then continue consuming content within their YESS reader. In this case, the segmentation data would be lost when making the jump from the web browser into the YESS reader.
-
-In order to handle this case, the URI provided in the `yess://` protocol scheme may be appended with a query string value, whose format is equal to the query string format used in Ping operations (see the *Ping* section below.)
 
 
 
@@ -401,9 +285,29 @@ Notify when a video has completed:
 
 
 
+## Transferring Segmentation Data
+
+There exists the case where a user could take a variety of actions which generate segmentation data, then choose to subscribe to a particular stream via clicking on a link to a syndicated stream text file, and then continue consuming content within their YESS reader. In this case, the segmentation data would be lost when making the jump from the web browser into the YESS reader.
+
+In order to handle this case, the URLs to syndicated stream text files are appended with a query string value, whose format is equal to the query string format used in Ping operations (see the *Ping* section below.)
+
+For example, given the following anchor tag:
+
+```html
+<a href="feed.s.txt">Subscribe to my YESS feed</a>
+```
+
+The `href` attribute will be internally re-written as:
+
+```html
+<a href="feed.s.txt?segmentation-data-injected-here">Subscribe to my YESS feed</a>
+```
+
+
+
 ## Pings
 
-The YESS protocol specifies a way to collect *Pings*, in response to user-triggered events. Pings are HTTP `HEAD` requests which are made to the URL specified in the `<meta name="yess-ping">` tag. The URL contains all of the data that has been collected for the user up until the point of the ping. This data is encoded in the querystring of the URL.
+The YESS protocol specifies a way to collect *Pings*, in response to user-triggered events. Pings are HTTP `HEAD` requests which are made to the URL specified in the `<meta name="yess-ping">` tag (explained below). The URL contains all of the data that has been collected for the user up until the point of the ping. This data is encoded in the querystring of the URL.
 
 If we assume that the following data has been collected:
 
@@ -422,53 +326,63 @@ http://yess-ping-domain.ext/?ping-identifier&b2&n1=3&n2=4
 
 
 
+### The `yess-ping` Meta Tag
+
+The `yess-ping` meta tag is used to specify the base URL where pings are sent.
+
+```html
+<meta name="yess-ping" content="https://www.analytics.com/path">
+```
+
+The URL should not specify a query string value (`?a=b`) or a fragment (`#`) as this information will be discarded by the user agent.
+
+The `yess-ping` meta tag may be defined within either a Cover HTML file or a Body HTML file. Stories that do not contain a `yess-ping` tag do not have the capability to send pings.
+
+When the `yess-ping` value is specified within an HTML file, whether of the Cover or Body variety, this value is inherited to all descendant HTML files. This allows for the scenario where multiple content owners contribute scenes to a particular story, and each owner needs to recieve analytics around user behavior for the scenes they've contributed. For example, if a story is composed by a main author, as well as scenes from two independent sponsors, each sponsor can receive analytics information for their own scenes, whereas the main author can recieve analytics information for the entire story.
+
+
+
 ## Conditional Expressions
 
-The `if=` sub-attribute within the `content` attribute uses a simple expression format.
+The `data-if=` attribute is used to conditionally display a tag based on client-side segmentation criteria. The attribute may exist on any tag in a YESS document. Its value is a simple expression format as described below
 
 
 Applies when the `mybool` tag is true:
 
 ```html
-<meta name="..." content="... if=mybool">
+<tag data-if="mybool">
 ```
 
 Applies when the `mybool` tag is false:
 
 ```html
-<meta name="..." content="... if=!mybool">
+<tag data-if="!mybool">
 ```
 
 Applies when the `mycount` tag is equal to 10:
 
 ```html
-<meta name="..." content="... if=mycount 10">
+<tag data-if="mycount 10">
 ```
 
 Applies when the `mycount` tag is greater than 10:
 
 ```html
-<meta name="..." content="... if=mycount > 10">
+<tag data-if="mycount > 10">
 ```
 
 Applies when the `mycount` tag is less than 10:
 
 ```html
-<meta name="..." content="... if=mycount < 10">
+<tag data-if="mycount < 10">
 ```
 
-The left side must be an identifer, and the optional right side must be a literal numeric value. There is no less-than-or-equals or greater-than-or-equals operators. 
+The left side must be an identifier, and the optional right side must be a literal numeric value. There is no less-than-or-equals or greater-than-or-equals operators.
 
-Logical AND is done by specifying having a compound statement:
+Logical AND is done by chaining multiple expressions together which are separated with the comma character:
 
 ```html
-<meta name="yess-cut" content="
-	../a.html, if=mycount < 10;
-	../a.html, if=mycount > 20">
+<tag data-if="mycount > 10, mycount < 20">
 ```
 
-The `data-if=` attribute follows a similar format, may be placed on any element to conditionally display it based on a condition:
-
-```html
-<section data-if="mycount > 10">...</section>
-```
+Logical OR is purposely omitted from this specification as a complexity reduction measure.
